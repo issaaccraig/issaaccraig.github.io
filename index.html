@@ -9,7 +9,9 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #0f0f0f;
+      background-image: url('https://steamuserimages-a.akamaihd.net/ugc/2058741034012526093/D413A8F912EDED5B50A0B6A9DFFB2C3DBBFF76A2/'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
       color: #ffffff;
       display: flex;
       justify-content: center;
@@ -68,7 +70,7 @@
   <div class="container">
     <h1>Elden Ring Rune Calculator</h1>
     <form id="rune-form">
-      <input type="number" id="current_level" placeholder="Current Level" required min="1">
+      <input type="number" id="current_level" placeholder="Current Level" required min="1" max="713">
       <input type="number" id="desired_level" placeholder="Desired Level (Max 713)" required min="1" max="713">
       <button type="submit">Calculate Runes</button>
     </form>
@@ -90,6 +92,12 @@
         if (desiredLevel > 713) {
           desiredLevel = 713;
           document.querySelector('#desired_level').value = 713; // Update input field
+        }
+
+        // Ensure currentLevel is not higher than desiredLevel
+        if (currentLevel > desiredLevel) {
+          alert('Current Level cannot be higher than Desired Level.');
+          return;
         }
 
         function calculateRuneCost(currentLevel, desiredLevel) {
