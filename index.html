@@ -6,7 +6,7 @@
   <title>Elden Ring Rune Calculator</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Mantinia, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Using Mantinia font */
       margin: 0;
       padding: 0;
       background-image: url('https://steamuserimages-a.akamaihd.net/ugc/2058741034012526093/D413A8F912EDED5B50A0B6A9DFFB2C3DBBFF76A2/'); /* Replace with your image URL */
@@ -32,6 +32,7 @@
       margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 2px;
+      font-family: Mantinia, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Using Mantinia font */
     }
     form {
       display: flex;
@@ -40,13 +41,14 @@
     }
     input, button {
       margin: 10px;
-      padding: 10px 20px;
+      padding: 15px 20px; /* Increased padding for larger input boxes */
       border: none;
       border-radius: 5px;
       font-size: 1rem;
+      font-family: Mantinia, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Using Mantinia font */
     }
     input[type="number"] {
-      width: 100px;
+      width: 180px; /* Adjusted width for larger input boxes */
       text-align: center;
     }
     button {
@@ -71,7 +73,7 @@
     <h1>Elden Ring Rune Calculator</h1>
     <form id="rune-form">
       <input type="number" id="current_level" placeholder="Current Level" required min="1" max="713">
-      <input type="number" id="desired_level" placeholder="Desired Level (Max 713)" required min="1" max="713">
+      <input type="number" id="desired_level" placeholder="Desired Level" required min="1" max="713">
       <button type="submit">Calculate Runes</button>
     </form>
     <div id="result"></div>
