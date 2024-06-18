@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elden Ring Rune Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Elden Ring Rune Calculator</h1>
+    <form id="rune-form">
+      <input type="number" id="current_level" placeholder="Current Level" required>
+      <input type="number" id="desired_level" placeholder="Desired Level" required>
+      <button type="submit">Calculate</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('#rune-form');
+      const resultDiv = document.querySelector('#result');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const currentLevel = parseInt(document.querySelector('#current_level').value);
+        const desiredLevel = parseInt(document.querySelector('#desired_level').value);
+
+        function calculateRuneCost(currentLevel, desiredLevel) {
+          if (currentLevel >= desiredLevel) {
+            return 0;
+          }
+
+          let totalRunesNeeded = 0;
+          for (let level = currentLevel; level < desiredLevel; level++) {
+            let x = ((level + 81) - 92) * 0.02;
+            if (x < 0) {
+              x = 0;
+            }
+            const runeCost = Math.floor((x + 0.1) * ((level + 81) ** 2)) + 1;
+            totalRunesNeeded += runeCost;
+          }
+
+          return totalRunesNeeded;
+        }
+
+        const runesNeeded = calculateRuneCost(currentLevel, desiredLevel);
+        resultDiv.textContent = `To level up from level ${currentLevel} to level ${desiredLevel}, you need ${runesNeeded.toLocaleString()} Runes.`;
+      });
+    });
+  </script>
+</body>
+</html>
