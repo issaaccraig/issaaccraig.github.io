@@ -6,36 +6,61 @@
   <title>Elden Ring Rune Calculator</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #0f0f0f;
+      color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: #f5f5f5;
+      min-height: 100vh;
     }
     .container {
       text-align: center;
-      background: white;
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     input, button {
       margin: 10px;
-      padding: 10px;
+      padding: 10px 20px;
+      border: none;
       border-radius: 5px;
-      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    input[type="number"] {
+      width: 100px;
+      text-align: center;
     }
     button {
       cursor: pointer;
-      background-color: #007bff;
-      color: white;
-      border: none;
+      background-color: #8f1919;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #0056b3;
+      background-color: #d63030;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -45,7 +70,7 @@
     <form id="rune-form">
       <input type="number" id="current_level" placeholder="Current Level" required min="1">
       <input type="number" id="desired_level" placeholder="Desired Level (Max 713)" required min="1" max="713">
-      <button type="submit">Calculate</button>
+      <button type="submit">Calculate Runes</button>
     </form>
     <div id="result"></div>
   </div>
@@ -61,8 +86,11 @@
         const currentLevel = parseInt(document.querySelector('#current_level').value);
         let desiredLevel = parseInt(document.querySelector('#desired_level').value);
 
-        // Limit desiredLevel to maximum of 713
-        desiredLevel = Math.min(desiredLevel, 713);
+        // Ensure desiredLevel does not exceed 713
+        if (desiredLevel > 713) {
+          desiredLevel = 713;
+          document.querySelector('#desired_level').value = 713; // Update input field
+        }
 
         function calculateRuneCost(currentLevel, desiredLevel) {
           if (currentLevel >= desiredLevel) {
@@ -83,7 +111,7 @@
         }
 
         const runesNeeded = calculateRuneCost(currentLevel, desiredLevel);
-        resultDiv.textContent = `To level up from level ${currentLevel} to level ${desiredLevel}, you need ${runesNeeded.toLocaleString()} Runes.`;
+        resultDiv.innerHTML = `<p>To level up from level ${currentLevel} to level ${desiredLevel}, you need <strong>${runesNeeded.toLocaleString()}</strong> Runes.</p>`;
       });
     });
   </script>
