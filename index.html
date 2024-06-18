@@ -43,8 +43,8 @@
   <div class="container">
     <h1>Elden Ring Rune Calculator</h1>
     <form id="rune-form">
-      <input type="number" id="current_level" placeholder="Current Level" required>
-      <input type="number" id="desired_level" placeholder="Desired Level" required>
+      <input type="number" id="current_level" placeholder="Current Level" required min="1">
+      <input type="number" id="desired_level" placeholder="Desired Level (Max 713)" required min="1" max="713">
       <button type="submit">Calculate</button>
     </form>
     <div id="result"></div>
@@ -59,7 +59,10 @@
         event.preventDefault();
         
         const currentLevel = parseInt(document.querySelector('#current_level').value);
-        const desiredLevel = parseInt(document.querySelector('#desired_level').value);
+        let desiredLevel = parseInt(document.querySelector('#desired_level').value);
+
+        // Limit desiredLevel to maximum of 713
+        desiredLevel = Math.min(desiredLevel, 713);
 
         function calculateRuneCost(currentLevel, desiredLevel) {
           if (currentLevel >= desiredLevel) {
@@ -86,3 +89,4 @@
   </script>
 </body>
 </html>
+
